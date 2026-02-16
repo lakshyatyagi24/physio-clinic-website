@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
+import logo from "@/logo.png";
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -18,11 +20,16 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-wrap items-center justify-between py-4">
           {/* Logo */}
-          <a className="flex items-center gap-2 group" href="#">
-            <div className="bg-primary/10 p-2 rounded-lg group-hover:bg-primary/20 transition-colors">
-              <span className="material-icons text-primary text-3xl">
-                medical_services
-              </span>
+          <a className="flex items-center gap-3 group" href="#">
+            <div className="bg-white rounded-lg p-1.5 border border-slate-200 shadow-sm">
+              <Image
+                src={logo}
+                alt="HealRight Physiotherapy logo"
+                width={44}
+                height={44}
+                className="h-11 w-11 object-contain"
+                priority
+              />
             </div>
             <span className="self-center text-2xl font-bold whitespace-nowrap text-slate-800 tracking-tight">
               HealRight

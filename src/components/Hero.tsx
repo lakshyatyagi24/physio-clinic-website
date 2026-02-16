@@ -1,3 +1,6 @@
+import Image from "next/image";
+import logo from "@/logo.png";
+
 export default function Hero() {
   return (
     <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
@@ -5,9 +8,21 @@ export default function Hero() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
           {/* Left – copy */}
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-6">
-              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              New Patients Welcome
+            <div className="flex items-center gap-3 mb-6">
+              <div className="bg-white rounded-xl p-2 border border-slate-200 shadow-sm">
+                <Image
+                  src={logo}
+                  alt="HealRight Physiotherapy logo"
+                  width={56}
+                  height={56}
+                  className="h-14 w-14 object-contain"
+                  priority
+                />
+              </div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-semibold">
+                <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                New Patients Welcome
+              </div>
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.15] mb-6">

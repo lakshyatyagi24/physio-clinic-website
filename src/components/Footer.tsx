@@ -1,3 +1,6 @@
+import Image from "next/image";
+import logo from "@/logo.png";
+
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
@@ -7,11 +10,15 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div>
-            <a className="flex items-center gap-2 mb-6" href="#">
-              <div className="bg-primary p-1.5 rounded-lg">
-                <span className="material-icons text-white text-2xl">
-                  medical_services
-                </span>
+            <a className="flex items-center gap-3 mb-6" href="#">
+              <div className="bg-white rounded-lg p-1.5 border border-slate-700/60 shadow-sm">
+                <Image
+                  src={logo}
+                  alt="HealRight Physiotherapy logo"
+                  width={44}
+                  height={44}
+                  className="h-11 w-11 object-contain"
+                />
               </div>
               <span className="text-2xl font-bold text-white tracking-tight">
                 HealRight
