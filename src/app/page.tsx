@@ -5,18 +5,22 @@ import AboutUs from "@/components/AboutUs";
 import Mission from "@/components/Mission";
 import Services from "@/components/Services";
 import Testimonials from "@/components/Testimonials";
+import BeforeAfter from "@/components/BeforeAfter";
+import ConditionsTreated from "@/components/ConditionsTreated";
+import CTA from "@/components/CTA";
 import ContactForm from "@/components/ContactForm";
 import LocationMap from "@/components/LocationMap";
-import CTA from "@/components/CTA";
 import HealthTips from "@/components/HealthTips";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import ScrollToTop from "@/components/ScrollToTop";
 import LoadingScreen from "@/components/LoadingScreen";
+import SchemaMarkup from "@/components/SchemaMarkup";
 
 export default function Home() {
   return (
     <>
+      <SchemaMarkup />
       <LoadingScreen />
       <Navbar />
       <Hero />
@@ -24,7 +28,9 @@ export default function Home() {
       <WhyChoose />
       <Mission />
       <Services />
+      <BeforeAfter />
       <Testimonials />
+      <ConditionsTreated />
       <CTA />
       <ContactForm />
       <LocationMap />

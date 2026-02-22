@@ -1,51 +1,27 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
-const testimonials = [
+// Fallback reviews in case API fails
+const fallbackTestimonials = [
   {
-    name: "Rahul Sharma",
+    name: "Patient from Google",
     rating: 5,
-    date: "2 weeks ago",
-    text: "Dr. Anchal is an exceptional physiotherapist. I had severe back pain for months, and after just a few sessions, I felt significant relief. The personalized treatment plan and exercises she recommended have made a lasting difference. Highly recommended!",
-    avatar: "RS",
-  },
-  {
-    name: "Priya Gupta",
-    rating: 5,
-    date: "1 month ago",
-    text: "I visited HealRight for my knee injury after surgery. Dr. Anchal's expertise in post-surgical rehab is remarkable. She was patient, thorough, and explained every exercise. My recovery was much faster than expected. Thank you, Dr. Anchal!",
-    avatar: "PG",
-  },
-  {
-    name: "Amit Verma",
-    rating: 5,
-    date: "3 weeks ago",
-    text: "Best physiotherapy clinic in Greater Noida West! Dr. Anchal truly understands the root cause of pain and provides targeted treatment. My sports injury healed perfectly under her care. The clinic is clean and well-equipped.",
-    avatar: "AV",
-  },
-  {
-    name: "Sneha Tyagi",
-    rating: 5,
-    date: "1 month ago",
-    text: "I was suffering from neck pain due to long working hours. Dr. Anchal provided excellent ergonomic advice along with therapy sessions. The pain is completely gone now. She also taught me exercises to prevent future issues.",
-    avatar: "ST",
-  },
-  {
-    name: "Vikash Kumar",
-    rating: 5,
-    date: "2 months ago",
-    text: "My mother had a neurological condition and we were worried. Dr. Anchal handled everything with care and professionalism. The improvement we've seen is incredible. She is very knowledgeable and compassionate. God bless!",
-    avatar: "VK",
-  },
-  {
-    name: "Meera Patel",
-    rating: 5,
-    date: "3 weeks ago",
-    text: "I came for pelvic floor therapy and was nervous initially. Dr. Anchal made me feel comfortable from the very first session. Her approach is professional yet caring. I noticed improvement within the first week itself. Truly grateful!",
-    avatar: "MP",
+    date: "Loading...",
+    text: "Loading live reviews from Google. Please check back in a moment.",
+    avatar: "G",
   },
 ];
+
+interface Review {
+  name: string;
+  rating: number;
+  text: string;
+  date: string;
+  avatar: string;
+  profilePhotoUrl?: string;
+}
 
 function StarRating({ rating }: { rating: number }) {
   return (
@@ -69,6 +45,30 @@ function StarRating({ rating }: { rating: number }) {
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [testimonials, setTestimonials] = useState<Review[]>(fallbackTestimonials);
+  const [isLoading, setIsLoading] = useState(true);
+  const [rating, setRating] = useState(5.0);
+
+  // Fetch live reviews from Google
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const response = await fetch("/api/reviews");
+        const data = await response.json();
+
+        if (data.reviews && data.reviews.length > 0) {
+          setTestimonials(data.reviews);
+          if (data.rating) setRating(data.rating);
+        }
+      } catch (error) {
+        console.error("Failed to fetch reviews:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchReviews();
+  }, []);
 
   useEffect(() => {
     if (!isAutoPlaying) return;
@@ -76,7 +76,7 @@ export default function Testimonials() {
       setCurrentIndex((prev) => (prev + 1) % testimonials.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, [isAutoPlaying]);
+  }, [isAutoPlaying, testimonials.length]);
 
   const goTo = (index: number) => {
     setCurrentIndex(index);
@@ -102,6 +102,19 @@ export default function Testimonials() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-14">
+          {/* Dr. Anchal Photo */}
+          <div className="mb-6 flex justify-center">
+            <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-4 border-primary shadow-lg">
+              <Image
+                src="/anchal_photo.png"
+                alt="Dr. Anchal Tyagi"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+          </div>
+
           <h2 className="text-primary font-bold tracking-wide uppercase text-sm mb-3">
             Patient Reviews
           </h2>
@@ -116,7 +129,7 @@ export default function Testimonials() {
           {/* Google Rating Badge */}
           <div className="flex items-center justify-center gap-4 mt-8">
             <a
-              href="https://g.co/kgs/HealRightPhysio"
+              href="https://www.google.com/maps/place/HealRight+Physiotherapy+Clinic+-+Dr.Anchal+Tyagi+(PT)/@28.620732,77.434316,17z/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 bg-white px-6 py-3 rounded-full shadow-md border border-slate-200 hover:shadow-lg transition-shadow"
@@ -145,7 +158,9 @@ export default function Testimonials() {
               </svg>
               <div className="text-left">
                 <div className="flex items-center gap-1">
-                  <span className="text-2xl font-bold text-slate-900">5.0</span>
+                  <span className="text-2xl font-bold text-slate-900">
+                    {rating.toFixed(1)}
+                  </span>
                   <div className="flex gap-0.5 ml-1">
                     {Array.from({ length: 5 }, (_, i) => (
                       <svg
@@ -257,7 +272,7 @@ export default function Testimonials() {
         {/* CTA to Google Reviews */}
         <div className="text-center mt-10">
           <a
-            href="https://search.google.com/local/writereview?placeid=ChIJxxxxxxxxxx"
+            href="https://www.google.com/maps/place/HealRight+Physiotherapy+Clinic+-+Dr.Anchal+Tyagi+(PT)/@28.620732,77.434316,17z/"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-primary font-semibold hover:underline"
