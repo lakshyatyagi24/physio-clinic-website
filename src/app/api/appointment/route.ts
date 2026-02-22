@@ -7,7 +7,21 @@ const senderAddress = process.env.MAILTRAP_SENDER_ADDRESS || "hello@demomailtrap
 const senderName = process.env.MAILTRAP_SENDER_NAME || "HealRight Physiotherapy";
 
 export async function POST(request: Request) {
+  // Debug logging
+  console.log("=== Appointment API Called ===");
+  console.log("Environment check:", {
+    hasToken: !!token,
+    tokenLength: token?.length || 0,
+    recipient,
+    senderAddress,
+    senderName,
+  });
+
   if (!token || !recipient) {
+    console.error("❌ Missing configuration:", {
+      hasToken: !!token,
+      hasRecipient: !!recipient,
+    });
     return new Response(
       JSON.stringify({
         ok: false,
@@ -18,6 +32,12 @@ export async function POST(request: Request) {
   }
 
   const body = await request.json();
+  console.log("📝 Request body received:", {
+    name: body.name,
+    phone: body.phone,
+    email: body.email,
+    hasMessage: !!body.message,
+  });
 
   const {
     name,
@@ -29,6 +49,7 @@ export async function POST(request: Request) {
   } = body || {};
 
   if (!name || !phone || !email) {
+    console.error("❌ Missing required fields:", { name, phone, email });
     return new Response(
       JSON.stringify({
         ok: false,
@@ -38,11 +59,13 @@ export async function POST(request: Request) {
     );
   }
 
+  console.log("📧 Creating Mailtrap transport...");
   const transport = Nodemailer.createTransport(
     MailtrapTransport({
       token,
     })
   );
+  console.log("✅ Transport created successfully");
 
   // Plain text version
   const emailText = [
@@ -236,17 +259,41 @@ export async function POST(request: Request) {
 </html>
   `.trim();
 
-  await transport.sendMail({
-    from: {
-      address: senderAddress,
-      name: senderName,
-    },
-    to: [recipient],
-    subject: `🏥 New Appointment Request - ${name}`,
-    text: emailText,
-    html: emailHtml,
-    category: "Appointment",
-  });
+  try {
+    console.log("📤 Sending email...", {
+      from: senderAddress,
+      to: recipient,
+      subject: `New Appointment Request - ${name}`,
+    });
 
-  return new Response(JSON.stringify({ ok: true }), { status: 200 });
+    await transport.sendMail({
+      from: {
+        address: senderAddress,
+        name: senderName,
+      },
+      to: [recipient],
+      subject: `🏥 New Appointment Request - ${name}`,
+      text: emailText,
+      html: emailHtml,
+      category: "Appointment",
+    });
+
+    console.log("✅ Email sent successfully!");
+    return new Response(JSON.stringify({ ok: true }), { status: 200 });
+  } catch (error) {
+    console.error("❌ Email sending failed:", error);
+    console.error("Error details:", {
+      message: error instanceof Error ? error.message : "Unknown error",
+      stack: error instanceof Error ? error.stack : undefined,
+    });
+    
+    return new Response(
+      JSON.stringify({
+        ok: false,
+        message: "Failed to send email. Please try again later.",
+        error: error instanceof Error ? error.message : "Unknown error",
+      }),
+      { status: 500 }
+    );
+  }
 }
