@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import logo from "@/logo.png";
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -24,7 +23,7 @@ export default function Navbar() {
           <a className="flex items-center gap-3 group" href="#">
             <div className="bg-white rounded-lg p-1.5 border border-slate-200 shadow-sm">
               <Image
-                src={logo}
+                src="/logo.png"
                 alt="HealRight Physiotherapy logo"
                 width={44}
                 height={44}

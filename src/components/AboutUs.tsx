@@ -10,15 +10,22 @@ export default function AboutUs() {
     <section id="about" className="py-20 lg:py-28 bg-white border-y border-slate-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Image side */}
-          <div className="relative">
+          {/* Dr. Anchal Photo */}
+          <div className="relative order-2 lg:order-1">
             <div className="absolute -top-4 -left-4 w-24 h-24 bg-primary/20 rounded-full blur-2xl" />
             <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-primary/20 rounded-full blur-2xl" />
-            <img
-              alt="HealRight clinic interior"
-              className="relative rounded-2xl shadow-xl z-10 w-full object-cover h-[480px]"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAotl2UZZ5z_H_iXx0C_I0S1_3WpHnA0685RieU9_v1JYb-GdQGrerP21rn4K5O0fvCwheStFnIGjb2yWNbZrVipFj2KMDBu-FhygIaiI9mVKvjGa-yF-hy5MYQ6-mRqCjSeEkY0kQzw0uoKy9DHyhXtpII2_Sgb6kLTtGnT2Ql1qWnfpi0p_ZyYB5zQ5H0EBHzB4A2nUGoVFao1mEtphHQhx8Pb6U5sHygNEDCYWf6XXUgY72qE7l6AZxjp6iDxQxWF9vEqJBUFts"
-            />
+            <div className="relative rounded-2xl shadow-xl z-10 overflow-hidden bg-slate-100 h-[480px]">
+              <img
+                alt="Dr. Anchal Tyagi - Physiotherapist"
+                className="w-full h-full object-cover"
+                src="/anchal_photo.png"
+              />
+              {/* Name Badge */}
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent pt-12 pb-6 px-6">
+                <p className="text-white text-2xl font-bold">Dr. Anchal Tyagi</p>
+                <p className="text-primary/80 text-sm font-medium">Physiotherapist (PT)</p>
+              </div>
+            </div>
             {/* Experience badge */}
             <div className="absolute -bottom-6 right-6 bg-primary text-white px-6 py-4 rounded-xl shadow-xl z-20">
               <p className="text-3xl font-extrabold leading-none">4+</p>
@@ -27,7 +34,7 @@ export default function AboutUs() {
           </div>
 
           {/* Text side */}
-          <div>
+          <div className="order-1 lg:order-2">
             <h2 className="text-primary font-bold tracking-wide uppercase text-sm mb-3">
               About Us
             </h2>

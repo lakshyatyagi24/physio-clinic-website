@@ -74,7 +74,7 @@ export default function ContactForm() {
                 </div>
                 <div>
                   <h5 className="font-bold text-slate-900">Phone</h5>
-                  <p className="text-slate-600">+91 92137 29266</p>
+                  <a href="tel:+919213729266" className="text-slate-600 hover:text-primary transition-colors">+91 92137 29266</a>
                 </div>
               </div>
 
@@ -84,7 +84,7 @@ export default function ContactForm() {
                 </div>
                 <div>
                   <h5 className="font-bold text-slate-900">Email</h5>
-                  <p className="text-slate-600">healrightphysio@gmail.com</p>
+                  <a href="mailto:healrightphysio@gmail.com" className="text-slate-600 hover:text-primary transition-colors">healrightphysio@gmail.com</a>
                 </div>
               </div>
 

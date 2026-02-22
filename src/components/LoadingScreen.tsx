@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import logo from "@/logo.png";
 
 export default function LoadingScreen() {
   const [isLoading, setIsLoading] = useState(true);
@@ -34,7 +33,7 @@ export default function LoadingScreen() {
       {/* Logo */}
       <div className="relative mb-6 animate-pulse">
         <Image
-          src={logo}
+          src="/logo.png"
           alt="HealRight Physiotherapy"
           width={80}
           height={80}

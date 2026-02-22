@@ -45,7 +45,7 @@ export default function Services() {
   return (
     <section id="services" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div className="max-w-2xl">
             <h2 className="text-primary font-bold tracking-wide uppercase text-sm mb-3">
               Our Services
@@ -56,6 +56,17 @@ export default function Services() {
             <p className="text-slate-600 mt-3">
               In-clinic care with specialized home visits available on request.
             </p>
+          </div>
+          <div className="flex items-center gap-3 px-4 py-3 bg-primary/5 rounded-xl border border-primary/10">
+            <img
+              src="/anchal_photo.png"
+              alt="Dr. Anchal Tyagi"
+              className="w-12 h-12 rounded-full object-cover"
+            />
+            <div className="text-sm">
+              <p className="font-bold text-slate-900">Delivered by Dr. Anchal</p>
+              <p className="text-primary text-xs">Expert Physiotherapist</p>
+            </div>
           </div>
           <a
             className="inline-flex items-center text-primary font-semibold hover:text-primary/80 transition-colors"

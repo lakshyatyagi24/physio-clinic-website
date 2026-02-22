@@ -130,7 +130,7 @@ export default function HealthTips() {
 
                 {/* Tips List */}
                 <ul className="space-y-2">
-                  {tip.tips.slice(0, 3).map((item, i) => (
+                  {tip.tips.map((item, i) => (
                     <li key={i} className="flex items-start gap-2 text-sm">
                       <span className="material-icons text-green-500 text-base mt-0.5 flex-shrink-0">
                         check_circle
@@ -138,11 +138,6 @@ export default function HealthTips() {
                       <span className="text-slate-700">{item}</span>
                     </li>
                   ))}
-                  {tip.tips.length > 3 && (
-                    <li className="text-xs text-primary font-medium pl-6">
-                      +{tip.tips.length - 3} more tips
-                    </li>
-                  )}
                 </ul>
               </div>
             </article>

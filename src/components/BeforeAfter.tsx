@@ -9,9 +9,9 @@ const beforeAfterCases = [
     condition: "Chronic Lower Back Pain",
     duration: "6 weeks",
     before:
-      "https://images.unsplash.com/photo-1576091160550-112173f7f869?w=400&h=500&fit=crop",
+      "https://images.pexels.com/photos/4327904/pexels-photo-4327904.jpeg?auto=compress&cs=tinysrgb&w=600",
     after:
-      "https://images.unsplash.com/photo-1576091160399-f2aaad00c17c?w=400&h=500&fit=crop",
+      "https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg?auto=compress&cs=tinysrgb&w=600",
   },
   {
     id: 2,
@@ -19,9 +19,9 @@ const beforeAfterCases = [
     condition: "Knee ACL Surgery Recovery",
     duration: "10 weeks",
     before:
-      "https://images.unsplash.com/photo-1631217314830-d67d3d33fda2?w=400&h=500&fit=crop",
+      "https://images.pexels.com/photos/3807515/pexels-photo-3807515.jpeg?auto=compress&cs=tinysrgb&w=600",
     after:
-      "https://images.unsplash.com/photo-1631217315981-d67d3d33fdb2?w=400&h=500&fit=crop",
+      "https://images.pexels.com/photos/3807514/pexels-photo-3807514.jpeg?auto=compress&cs=tinysrgb&w=600",
   },
   {
     id: 3,
@@ -29,9 +29,9 @@ const beforeAfterCases = [
     condition: "Office Worker Syndrome",
     duration: "4 weeks",
     before:
-      "https://images.unsplash.com/photo-1551632786-de41ec16a heading-a?w=400&h=500&fit=crop",
+      "https://images.pexels.com/photos/3945683/pexels-photo-3945683.jpeg?auto=compress&cs=tinysrgb&w=600",
     after:
-      "https://images.unsplash.com/photo-1551632786-de41ec16a heading-b?w=400&h=500&fit=crop",
+      "https://images.pexels.com/photos/3807513/pexels-photo-3807513.jpeg?auto=compress&cs=tinysrgb&w=600",
   },
   {
     id: 4,
@@ -39,9 +39,9 @@ const beforeAfterCases = [
     condition: "Ankle Sprain Recovery",
     duration: "8 weeks",
     before:
-      "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400&h=500&fit=crop",
+      "https://images.pexels.com/photos/4326562/pexels-photo-4326562.jpeg?auto=compress&cs=tinysrgb&w=600",
     after:
-      "https://images.unsplash.com/photo-1571019614243-c5c5dee9f50c?w=400&h=500&fit=crop",
+      "https://images.pexels.com/photos/3807511/pexels-photo-3807511.jpeg?auto=compress&cs=tinysrgb&w=600",
   },
 ];
 

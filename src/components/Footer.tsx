@@ -1,5 +1,4 @@
 import Image from "next/image";
-import logo from "@/logo.png";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -13,7 +12,7 @@ export default function Footer() {
             <a className="flex items-center gap-3 mb-6" href="#">
               <div className="bg-white rounded-lg p-1.5 border border-slate-700/60 shadow-sm">
                 <Image
-                  src={logo}
+                  src="/logo.png"
                   alt="HealRight Physiotherapy logo"
                   width={44}
                   height={44}
@@ -31,7 +30,9 @@ export default function Footer() {
             <div className="flex space-x-4">
               <a
                 className="text-slate-400 hover:text-white transition-colors"
-                href="#"
+                href="https://www.facebook.com/healright.physio"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Facebook"
               >
                 <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -40,7 +41,9 @@ export default function Footer() {
               </a>
               <a
                 className="text-slate-400 hover:text-white transition-colors"
-                href="#"
+                href="https://www.instagram.com/healright.physio/"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Instagram"
               >
                 <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -121,11 +124,11 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <span className="material-icons text-primary text-lg">phone</span>
-                <span>+91 92137 29266</span>
+                <a href="tel:+919213729266" className="hover:text-primary transition-colors">+91 92137 29266</a>
               </li>
               <li className="flex items-center gap-3">
                 <span className="material-icons text-primary text-lg">email</span>
-                <span>healrightphysio@gmail.com</span>
+                <a href="mailto:healrightphysio@gmail.com" className="hover:text-primary transition-colors">healrightphysio@gmail.com</a>
               </li>
             </ul>
           </div>

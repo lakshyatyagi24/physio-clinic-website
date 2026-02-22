@@ -1,5 +1,4 @@
 import Image from "next/image";
-import logo from "@/logo.png";
 
 export default function Hero() {
   return (
@@ -11,7 +10,7 @@ export default function Hero() {
             <div className="flex items-center gap-3 mb-6">
               <div className="bg-white rounded-xl p-2 border border-slate-200 shadow-sm">
                 <Image
-                  src={logo}
+                  src="/logo.png"
                   alt="HealRight Physiotherapy logo"
                   width={56}
                   height={56}
@@ -104,14 +103,24 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right – image */}
+          {/* Right – Dr. Anchal image */}
           <div className="relative lg:h-full min-h-[400px]">
             <div className="absolute inset-0 bg-primary/10 rounded-3xl transform rotate-3 scale-95" />
-            <img
-              alt="Physiotherapist helping patient with leg stretch"
-              className="relative rounded-3xl shadow-2xl object-cover w-full h-full min-h-[500px]"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeUyXSW0fl1BsB6doqCFiRa4OBneVnoGm3kr_jk8Ev_glW75Z0wrpEUIkeHl0z4w_OMlRxNgglKyEJHC_Ci5McWu74KyIGSl2huW91iFkigZ2PRfy1DomHr6vWhVN4LtU1Nh5w0zDKQJRqgW8lW-ecBWJr0huvISNg-aHHRs7l540MuY-GkFraczhv-T15_ZH0R59uS4V9BOW5YOVyIdoP6rYockNvr289AhXT9x8eXEy326JJ0lnj7J32ovOtZgb0uwL7IN9rMvE"
-            />
+            <div className="relative rounded-3xl shadow-2xl overflow-hidden w-full h-full min-h-[500px] bg-slate-100">
+              <img
+                alt="Dr. Anchal Tyagi - Experienced Physiotherapist"
+                className="w-full h-full object-cover"
+                src="/anchal_photo.png"
+              />
+              {/* Gradient overlay with credentials */}
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent pt-16 pb-8 px-8">
+                <p className="text-white text-2xl font-bold mb-1">Dr. Anchal Tyagi</p>
+                <p className="text-primary text-sm font-semibold mb-3">Senior Physiotherapist (PT)</p>
+                <p className="text-white/90 text-sm leading-relaxed">
+                  4+ years of clinical expertise in restoring mobility and improving quality of life
+                </p>
+              </div>
+            </div>
             {/* Floating badge */}
             <div
               className="absolute bottom-8 left-8 bg-white p-4 rounded-xl shadow-xl flex items-center gap-3 animate-bounce"
