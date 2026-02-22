@@ -129,7 +129,7 @@ export default function Testimonials() {
           {/* Google Rating Badge */}
           <div className="flex items-center justify-center gap-4 mt-8">
             <a
-              href="https://www.google.com/maps/place/HealRight+Physiotherapy+Clinic+-+Dr.Anchal+Tyagi+(PT)/@28.620732,77.434316,17z/"
+              href="https://g.page/r/CeJbUKqgcXFtEAE/review"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 bg-white px-6 py-3 rounded-full shadow-md border border-slate-200 hover:shadow-lg transition-shadow"
@@ -186,7 +186,7 @@ export default function Testimonials() {
             {getVisibleCards().map((t, idx) => (
               <div
                 key={`${t.name}-${idx}`}
-                className={`bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-md transition-all duration-300 ${
+                className={`bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-md transition-all duration-300 min-h-[240px] flex flex-col ${
                   idx === 0 ? "" : idx === 1 ? "hidden md:block" : "hidden lg:block"
                 }`}
               >
@@ -227,7 +227,7 @@ export default function Testimonials() {
                 </div>
 
                 {/* Review Text */}
-                <p className="text-slate-600 text-sm leading-relaxed">
+                <p className="text-slate-600 text-sm leading-relaxed flex-grow">
                   &quot;{t.text}&quot;
                 </p>
               </div>
@@ -272,7 +272,7 @@ export default function Testimonials() {
         {/* CTA to Google Reviews */}
         <div className="text-center mt-10">
           <a
-            href="https://www.google.com/maps/place/HealRight+Physiotherapy+Clinic+-+Dr.Anchal+Tyagi+(PT)/@28.620732,77.434316,17z/"
+            href="https://g.page/r/CeJbUKqgcXFtEAE/review"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-primary font-semibold hover:underline"

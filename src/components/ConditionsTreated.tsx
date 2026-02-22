@@ -54,14 +54,6 @@ export default function ConditionsTreated() {
               <p className="text-slate-600 text-sm leading-relaxed">
                 {condition.description}
               </p>
-
-              {/* Arrow */}
-              <div className="mt-4 flex items-center text-primary font-semibold text-sm opacity-0 group-hover:opacity-100 transition-opacity">
-                Learn more
-                <span className="material-icons text-base ml-1">
-                  arrow_forward
-                </span>
-              </div>
             </div>
           ))}
         </div>

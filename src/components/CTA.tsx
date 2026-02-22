@@ -34,7 +34,7 @@ export default function CTA() {
               <img
                 src="/anchal_photo.png"
                 alt="Dr. Anchal Tyagi"
-                className="w-full h-72 object-cover"
+                className="w-full h-72 object-contain bg-slate-50"
               />
               <div className="p-6 bg-gradient-to-b from-slate-50 to-white">
                 <p className="text-2xl font-bold text-slate-900 mb-1">Dr. Anchal Tyagi</p>

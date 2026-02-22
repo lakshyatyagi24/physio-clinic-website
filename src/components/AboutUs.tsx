@@ -17,7 +17,7 @@ export default function AboutUs() {
             <div className="relative rounded-2xl shadow-xl z-10 overflow-hidden bg-slate-100 h-[480px]">
               <img
                 alt="Dr. Anchal Tyagi - Physiotherapist"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
                 src="/anchal_photo.png"
               />
               {/* Name Badge */}
