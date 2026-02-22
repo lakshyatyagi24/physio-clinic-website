@@ -259,13 +259,172 @@ export async function POST(request: Request) {
 </html>
   `.trim();
 
+  // Patient confirmation email
+  const confirmationHtml = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Appointment Confirmation</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f5f5f5;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f5f5f5; padding: 40px 20px;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); overflow: hidden;">
+          
+          <!-- Header -->
+          <tr>
+            <td style="background: linear-gradient(135deg, #9B5E2F 0%, #7a4a24 100%); padding: 40px 30px; text-align: center;">
+              <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 700;">
+                🏥 HealRight Physiotherapy
+              </h1>
+              <p style="margin: 8px 0 0 0; color: #f0e6d9; font-size: 14px;">
+                Restore Motion, Reclaim Life
+              </p>
+            </td>
+          </tr>
+
+          <!-- Success Banner -->
+          <tr>
+            <td style="background-color: #22c55e; padding: 20px 30px; text-align: center;">
+              <p style="margin: 0; color: #ffffff; font-size: 18px; font-weight: 600;">
+                ✅ Your Appointment Request Has Been Received!
+              </p>
+            </td>
+          </tr>
+
+          <!-- Message -->
+          <tr>
+            <td style="padding: 40px 30px 30px 30px; text-align: center;">
+              <h2 style="margin: 0 0 16px 0; color: #1e1814; font-size: 24px; font-weight: 700;">
+                Thank You, ${name}!
+              </h2>
+              <p style="margin: 0; color: #6b7280; font-size: 16px; line-height: 1.6;">
+                We've received your appointment request and Dr. Anchal Tyagi will review it shortly.<br>
+                You can expect to hear from us within <strong>24 hours</strong> to confirm your appointment.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Details Summary -->
+          <tr>
+            <td style="padding: 0 30px 30px 30px;">
+              <div style="background-color: #f9fafb; border-left: 4px solid #9B5E2F; padding: 20px; border-radius: 4px;">
+                <h3 style="margin: 0 0 16px 0; color: #1e1814; font-size: 18px; font-weight: 700;">
+                  📋 Your Request Details
+                </h3>
+                <table width="100%" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td style="padding: 8px 0; color: #6b7280; font-size: 14px;">Preferred Date:</td>
+                    <td style="padding: 8px 0; color: #1e1814; font-size: 14px; font-weight: 600; text-align: right;">
+                      ${preferred_date || "Not specified"}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 8px 0; color: #6b7280; font-size: 14px;">Services:</td>
+                    <td style="padding: 8px 0; color: #1e1814; font-size: 14px; font-weight: 600; text-align: right;">
+                      ${service || "Not specified"}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 8px 0; color: #6b7280; font-size: 14px;">Phone:</td>
+                    <td style="padding: 8px 0; color: #1e1814; font-size: 14px; font-weight: 600; text-align: right;">
+                      ${phone}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 8px 0; color: #6b7280; font-size: 14px;">Email:</td>
+                    <td style="padding: 8px 0; color: #1e1814; font-size: 14px; font-weight: 600; text-align: right;">
+                      ${email}
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Contact Info -->
+          <tr>
+            <td style="padding: 0 30px 30px 30px;">
+              <div style="background-color: #fef3e2; border: 1px solid #f4d4a8; padding: 20px; border-radius: 8px; text-align: center;">
+                <p style="margin: 0 0 12px 0; color: #92400e; font-size: 15px; font-weight: 600;">
+                  📞 Need to reach us immediately?
+                </p>
+                <p style="margin: 0; color: #78350f;">
+                  <strong>Phone:</strong> <a href="tel:+919213729266" style="color: #9B5E2F; text-decoration: none;">+91 92137 29266</a><br>
+                  <strong>Email:</strong> <a href="mailto:healrightphysio@gmail.com" style="color: #9B5E2F; text-decoration: none;">healrightphysio@gmail.com</a>
+                </p>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="background-color: #1e1814; padding: 30px; text-align: center;">
+              <p style="margin: 0 0 12px 0; color: #d1d5db; font-size: 14px;">
+                <strong style="color: #ffffff;">HealRight Physiotherapy</strong><br>
+                Dr. Anchal Tyagi (PT)
+              </p>
+              <p style="margin: 0 0 16px 0; color: #9ca3af; font-size: 13px; font-style: italic;">
+                Restore Motion, Reclaim Life
+              </p>
+              <p style="margin: 0; color: #9ca3af; font-size: 12px; line-height: 1.6;">
+                📍 306, M.k. Tyagi Villa, Sai Garden 2, Shahberi<br>
+                Sector 4, Greater Noida West, Gautam Budh Nagar, UP - 201301<br>
+                <a href="https://healrightphysio.in/" style="color: #9B5E2F; text-decoration: none;">healrightphysio.in</a>
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+  `.trim();
+
+  const confirmationText = [
+    `Appointment Request Confirmation - HealRight Physiotherapy`,
+    ``,
+    `Dear ${name},`,
+    ``,
+    `Thank you for choosing HealRight Physiotherapy!`,
+    ``,
+    `We've successfully received your appointment request and Dr. Anchal Tyagi`,
+    `will review it shortly. You can expect to hear from us within 24 hours`,
+    `to confirm your appointment.`,
+    ``,
+    `YOUR REQUEST DETAILS`,
+    `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`,
+    `Preferred Date: ${preferred_date || "Not specified"}`,
+    `Services: ${service || "Not specified"}`,
+    `Phone: ${phone}`,
+    `Email: ${email}`,
+    ``,
+    `NEED TO REACH US IMMEDIATELY?`,
+    `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`,
+    `Phone: +91 92137 29266`,
+    `Email: healrightphysio@gmail.com`,
+    ``,
+    `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`,
+    `HealRight Physiotherapy - Restore Motion, Reclaim Life`,
+    `Dr. Anchal Tyagi (PT)`,
+    ``,
+    `306, M.k. Tyagi Villa, Sai Garden 2, Shahberi,`,
+    `Sector 4, Greater Noida West, Gautam Budh Nagar, UP - 201301`,
+    `Website: https://healrightphysio.in/`,
+  ].join("\n");
+
   try {
-    console.log("📤 Sending email...", {
-      from: senderAddress,
-      to: recipient,
-      subject: `New Appointment Request - ${name}`,
+    console.log("📤 Sending emails...", {
+      clinicEmail: recipient,
+      patientEmail: email,
     });
 
+    // Send notification to clinic
     await transport.sendMail({
       from: {
         address: senderAddress,
@@ -278,7 +437,22 @@ export async function POST(request: Request) {
       category: "Appointment",
     });
 
-    console.log("✅ Email sent successfully!");
+    console.log("✅ Clinic notification sent");
+
+    // Send confirmation to patient
+    await transport.sendMail({
+      from: {
+        address: senderAddress,
+        name: senderName,
+      },
+      to: [email],
+      subject: `✅ Appointment Request Received - HealRight Physiotherapy`,
+      text: confirmationText,
+      html: confirmationHtml,
+      category: "Confirmation",
+    });
+
+    console.log("✅ Patient confirmation sent");
     return new Response(JSON.stringify({ ok: true }), { status: 200 });
   } catch (error) {
     console.error("❌ Email sending failed:", error);

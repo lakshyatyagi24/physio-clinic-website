@@ -5,6 +5,15 @@ import { useState, FormEvent } from "react";
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [selectedServices, setSelectedServices] = useState<string[]>([]);
+
+  const handleServiceChange = (service: string) => {
+    setSelectedServices((prev) =>
+      prev.includes(service)
+        ? prev.filter((s) => s !== service)
+        : [...prev, service]
+    );
+  };
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -24,7 +33,7 @@ export default function ContactForm() {
           phone: data.get("phone"),
           email: data.get("email"),
           preferred_date: data.get("preferred_date"),
-          service: data.get("service"),
+          service: selectedServices.join(", ") || "Not specified",
           message: data.get("message"),
         }),
       });
@@ -32,6 +41,7 @@ export default function ContactForm() {
       if (res.ok) {
         setSubmitted(true);
         form.reset();
+        setSelectedServices([]);
       }
     } catch {
       alert("Something went wrong. Please try again or call us directly.");
@@ -109,6 +119,9 @@ export default function ContactForm() {
                   We&apos;ve received your request. Dr. Anchal will contact you
                   shortly to confirm your appointment.
                 </p>
+                <p className="text-slate-600 mt-2">
+                  A confirmation email has been sent to your inbox.
+                </p>
                 <button
                   className="mt-6 text-primary font-semibold hover:underline"
                   onClick={() => setSubmitted(false)}
@@ -165,29 +178,46 @@ export default function ContactForm() {
                   <input
                     type="date"
                     name="preferred_date"
+                    min={new Date().toISOString().split('T')[0]}
                     className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-slate-800 bg-white"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-slate-800 mb-1.5">
-                    Service Needed
+                  <label className="block text-sm font-semibold text-slate-800 mb-2">
+                    Services Needed (select all that apply)
                   </label>
-                  <select
-                    name="service"
-                    className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-slate-800 bg-white"
-                  >
-                    <option value="">Select a service</option>
-                    <option>Orthopedic Rehab</option>
-                    <option>Sports Injury Recovery</option>
-                    <option>Pre &amp; Post Surgical Rehab</option>
-                    <option>Neurological Care</option>
-                    <option>Ergonomic Advice</option>
-                    <option>Pelvic Floor &amp; Women’s Health</option>
-                    <option>Geriatric Care</option>
-                    <option>Pediatrics Rehab</option>
-                    <option>Other</option>
-                  </select>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 rounded-xl border border-slate-300 bg-white max-h-64 overflow-y-auto">
+                    {[
+                      "Orthopedic Rehab",
+                      "Sports Injury Recovery",
+                      "Pre & Post Surgical Rehab",
+                      "Neurological Care",
+                      "Ergonomic Advice",
+                      "Pelvic Floor & Women's Health",
+                      "Geriatric Care",
+                      "Pediatrics Rehab",
+                      "Other",
+                    ].map((service) => (
+                      <label
+                        key={service}
+                        className="flex items-center gap-2 cursor-pointer hover:text-primary transition-colors"
+                      >
+                        <input
+                          type="checkbox"
+                          checked={selectedServices.includes(service)}
+                          onChange={() => handleServiceChange(service)}
+                          className="w-4 h-4 text-primary border-slate-300 rounded focus:ring-primary focus:ring-2"
+                        />
+                        <span className="text-sm text-slate-700">{service}</span>
+                      </label>
+                    ))}
+                  </div>
+                  {selectedServices.length > 0 && (
+                    <p className="text-xs text-slate-500 mt-2">
+                      Selected: {selectedServices.join(", ")}
+                    </p>
+                  )}
                 </div>
 
                 <div>
