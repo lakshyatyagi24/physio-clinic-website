@@ -47,6 +47,7 @@ export default function Testimonials() {
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [testimonials, setTestimonials] = useState<Review[]>(fallbackTestimonials);
   const [isLoading, setIsLoading] = useState(true);
+  const [hasFailed, setHasFailed] = useState(false);
   const [rating, setRating] = useState(5.0);
 
   // Fetch live reviews from Google
@@ -59,9 +60,13 @@ export default function Testimonials() {
         if (data.reviews && data.reviews.length > 0) {
           setTestimonials(data.reviews);
           if (data.rating) setRating(data.rating);
+        } else {
+          if (data.reason) console.warn("Reviews unavailable:", data.reason);
+          setHasFailed(true);
         }
       } catch (error) {
         console.error("Failed to fetch reviews:", error);
+        setHasFailed(true);
       } finally {
         setIsLoading(false);
       }
@@ -180,8 +185,26 @@ export default function Testimonials() {
           </div>
         </div>
 
+        {/* Reviews unavailable: point visitors to Google instead of a stuck "Loading" state */}
+        {!isLoading && hasFailed && (
+          <div className="max-w-xl mx-auto bg-white rounded-2xl p-8 shadow-sm border border-slate-100 text-center">
+            <p className="text-slate-600 mb-4">
+              Read what our patients say about us on Google.
+            </p>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=HealRight+Physiotherapy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-primary text-white font-semibold px-6 py-3 rounded-full hover:opacity-90 transition-opacity"
+            >
+              <span className="material-icons text-lg">reviews</span>
+              See all Google reviews
+            </a>
+          </div>
+        )}
+
         {/* Testimonial Cards */}
-        <div className="relative">
+        <div className={`relative ${!isLoading && hasFailed ? "hidden" : ""}`}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {getVisibleCards().map((t, idx) => (
               <div
